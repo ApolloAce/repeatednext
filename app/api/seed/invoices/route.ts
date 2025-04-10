@@ -34,7 +34,11 @@ export async function GET() {
   try {
     await seedInvoices();
     return Response.json({ message: 'Invoices seeded successfully' });
-  } catch (error) {
-    return Response.json({ error: 'Error seeding invoices', status: 500 });
+  } catch (error: any) {
+    console.error('Seeding error:', error); // <-- Log actual error
+    return Response.json(
+      { error: error.message || 'Unknown error', status: 500 },
+      { status: 500 }
+    );
   }
 }
