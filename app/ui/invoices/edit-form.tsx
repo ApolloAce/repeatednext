@@ -11,7 +11,6 @@ import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import {updateInvoice, State} from '@/app/lib/actions';
 import { useActionState } from 'react';
-import { UpdateInvoice } from './buttons';
 
 export default function EditInvoiceForm({
   invoice,
@@ -116,6 +115,11 @@ export default function EditInvoiceForm({
           </div>
         </fieldset>
       </div>
+      
+      {state?.message && (
+        <p className="mt-2 text-sm text-red-500">{state.message}</p>
+      )}
+
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/dashboard/invoices"

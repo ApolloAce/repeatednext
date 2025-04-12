@@ -34,6 +34,6 @@ export async function GET() {
     await seedCustomers();
     return Response.json({ message: 'Customers seeded successfully' });
   } catch (error) {
-    return Response.json({ error: 'Error seeding customers', status: 500 });
+    return Response.json({ error: String(error) }, { status: 500 });
   }
 }

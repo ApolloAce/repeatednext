@@ -34,11 +34,13 @@ export async function GET() {
   try {
     await seedInvoices();
     return Response.json({ message: 'Invoices seeded successfully' });
-  } catch (error: any) {
-    console.error('Seeding error:', error); // <-- Log actual error
-    return Response.json(
-      { error: error.message || 'Unknown error', status: 500 },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error('Seeding error:', error);
+      return Response.json({ error: error.message }, { status: 500 });
+    }
+  
+    // fallback for non-Error types
+    return Response.json({ error: 'Unknown error occurred' }, { status: 500 });
   }
 }
