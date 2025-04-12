@@ -30,6 +30,7 @@ export async function GET() {
     await seedRevenue();
     return Response.json({ message: 'Revenue seeded successfully' });
   } catch (error) {
+    console.error('Error seeding revenue:', error);
     return Response.json({ error: 'Error seeding revenue', status: 500 });
   }
 }
